@@ -1,4 +1,3 @@
-
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,48 +15,77 @@ def fator_exp(v, M, T):
 def F_MB(v, M, T):
     return fator_pre_exp(v, M, T) * fator_exp(v, M, T)
 
-# Interface
-st.title("Distribuição de Maxwell-Boltzmann Interativa")
-st.markdown("Insira os valores para temperatura e massa molar do gás:")
-
-# Entradas do usuário
-massa_molar = st.number_input("Massa molar (g/mol)", value=44.0, step=0.1)
-temperatura = st.number_input("Temperatura (K)", value=288.0, step=1.0)
-
-# Conversão g/mol → kg/mol
-M = massa_molar / 1000
-
-# Vetor de velocidades
+# Velocidade vetorial padrão
 v = np.linspace(0, 4000, 500)
 
-# Cálculos
-f_pre = fator_pre_exp(v, M, temperatura)
-f_exp = fator_exp(v, M, temperatura)
-f_total = F_MB(v, M, temperatura)
+# Interface com múltiplas páginas
+st.sidebar.title("Navegação")
+pagina = st.sidebar.radio("Escolha a visualização:", ["1. Um gás, uma temperatura", "2. Um gás, duas temperaturas", "3. Dois gases, uma temperatura"])
 
-# Gráfico 1 - Pré-exponencial
-fig1, ax1 = plt.subplots()
-ax1.plot(v, f_pre, label="Pré-Exponencial")
-ax1.set_xlabel("Velocidade (m/s)")
-ax1.set_ylabel("Valor")
-ax1.set_title("Pré-exponencial × Velocidade")
-ax1.grid(True)
-st.pyplot(fig1)
+# Página 1
+if pagina == "1. Um gás, uma temperatura":
+    st.title("Distribuição de Maxwell-Boltzmann")
+    st.markdown("### Página 1: Um gás em uma temperatura")
 
-# Gráfico 2 - Exponencial
-fig2, ax2 = plt.subplots()
-ax2.plot(v, f_exp, color='orange', label="Exponencial")
-ax2.set_xlabel("Velocidade (m/s)")
-ax2.set_ylabel("Valor")
-ax2.set_title("Exponencial × Velocidade")
-ax2.grid(True)
-st.pyplot(fig2)
+    massa_molar = st.number_input("Massa molar (g/mol)", value=44.0, step=0.1)
+    temperatura = st.number_input("Temperatura (K)", value=288.0, step=1.0)
+    M = massa_molar / 1000
 
-# Gráfico 3 - Distribuição F(v)
-fig3, ax3 = plt.subplots()
-ax3.plot(v, f_total, color='green', label="F(v)")
-ax3.set_xlabel("Velocidade (m/s)")
-ax3.set_ylabel("Distribuição")
-ax3.set_title("Distribuição de Maxwell-Boltzmann")
-ax3.grid(True)
-st.pyplot(fig3)
+    f_MB = F_MB(v, M, temperatura)
+
+    fig, ax = plt.subplots()
+    ax.plot(v, f_MB, color='green', label=f"{massa_molar} g/mol a {temperatura} K")
+    ax.set_title("Distribuição de Maxwell-Boltzmann")
+    ax.set_xlabel("Velocidade (m/s)")
+    ax.set_ylabel("F(v)")
+    ax.legend()
+    ax.grid(True)
+    st.pyplot(fig)
+
+# Página 2
+elif pagina == "2. Um gás, duas temperaturas":
+    st.title("Distribuição de Maxwell-Boltzmann")
+    st.markdown("### Página 2: Um gás em duas temperaturas")
+
+    massa_molar = st.number_input("Massa molar (g/mol)", value=44.0, step=0.1)
+    T1 = st.number_input("Temperatura 1 (K)", value=288.0, step=1.0)
+    T2 = st.number_input("Temperatura 2 (K)", value=740.0, step=1.0)
+    M = massa_molar / 1000
+
+    f1 = F_MB(v, M, T1)
+    f2 = F_MB(v, M, T2)
+
+    fig, ax = plt.subplots()
+    ax.plot(v, f1, label=f"{massa_molar} g/mol a {T1} K", color='blue')
+    ax.plot(v, f2, label=f"{massa_molar} g/mol a {T2} K", color='red')
+    ax.set_title("Distribuição para um mesmo gás em duas temperaturas")
+    ax.set_xlabel("Velocidade (m/s)")
+    ax.set_ylabel("F(v)")
+    ax.legend()
+    ax.grid(True)
+    st.pyplot(fig)
+
+# Página 3
+elif pagina == "3. Dois gases, uma temperatura":
+    st.title("Distribuição de Maxwell-Boltzmann")
+    st.markdown("### Página 3: Dois gases em uma mesma temperatura")
+
+    massa_molar_1 = st.number_input("Massa molar do gás 1 (g/mol)", value=44.0, step=0.1)
+    massa_molar_2 = st.number_input("Massa molar do gás 2 (g/mol)", value=2.0, step=0.1)
+    temperatura = st.number_input("Temperatura (K)", value=288.0, step=1.0)
+
+    M1 = massa_molar_1 / 1000
+    M2 = massa_molar_2 / 1000
+
+    f1 = F_MB(v, M1, temperatura)
+    f2 = F_MB(v, M2, temperatura)
+
+    fig, ax = plt.subplots()
+    ax.plot(v, f1, label=f"{massa_molar_1} g/mol", color='purple')
+    ax.plot(v, f2, label=f"{massa_molar_2} g/mol", color='orange')
+    ax.set_title("Distribuição para dois gases em uma mesma temperatura")
+    ax.set_xlabel("Velocidade (m/s)")
+    ax.set_ylabel("F(v)")
+    ax.legend()
+    ax.grid(True)
+    st.pyplot(fig)
