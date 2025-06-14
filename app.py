@@ -51,7 +51,7 @@ Onde:
 - \(F(v)\): densidade de probabilidade de velocidade \(v\)
 - \(M\): massa molar (kg/mol)
 - \(T\): temperatura (K)
-- \(R\): constante dos gases (8{,}314 J/mol·K)
+- \(R\): constante dos gases (8,314 J/mol·K)
 
 
 
