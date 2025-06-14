@@ -40,7 +40,6 @@ Essa distribuição ajuda a entender:
 - Por que **moléculas mais leves** tendem a se mover mais rápido
 - A razão pela qual certos **gases escapam da atmosfera de planetas**
 
-st.markdown(r'''
 A equação usada neste simulador é:
 
 $$
