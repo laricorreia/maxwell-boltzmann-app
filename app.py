@@ -43,7 +43,7 @@ Essa distribuição ajuda a entender:
 A equação usada neste simulador é:
 
 $$
-F(v) = 4\pi \left( \frac{M}{2\pi RT} \right)^{3/2} v^2 \cdot e^{-\\frac{Mv^2}{2RT}}
+F(v) = 4\pi \left( \frac{M}{2\pi RT} \right)^{3/2} v^2 \cdot e^{-\\{Mv^2}/{2RT}}
 $$
 
 Onde:
