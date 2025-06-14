@@ -15,7 +15,7 @@ def fator_exp(v, M, T):
 def F_MB(v, M, T):
     return fator_pre_exp(v, M, T) * fator_exp(v, M, T)
 
-# Velocidade vetorial padrão
+# Vetor de velocidades
 v = np.linspace(0, 4000, 500)
 
 # Interface com múltiplas páginas
@@ -31,16 +31,33 @@ if pagina == "1. Um gás, uma temperatura":
     temperatura = st.number_input("Temperatura (K)", value=288.0, step=1.0)
     M = massa_molar / 1000
 
+    f_pre = fator_pre_exp(v, M, temperatura)
+    f_exp = fator_exp(v, M, temperatura)
     f_MB = F_MB(v, M, temperatura)
 
-    fig, ax = plt.subplots()
-    ax.plot(v, f_MB, color='green', label=f"{massa_molar} g/mol a {temperatura} K")
-    ax.set_title("Distribuição de Maxwell-Boltzmann")
-    ax.set_xlabel("Velocidade (m/s)")
-    ax.set_ylabel("F(v)")
-    ax.legend()
-    ax.grid(True)
-    st.pyplot(fig)
+    fig1, ax1 = plt.subplots()
+    ax1.plot(v, f_pre, label="Pré-Exponencial")
+    ax1.set_title("Fator Pré-Exponencial × Velocidade")
+    ax1.set_xlabel("Velocidade (m/s)")
+    ax1.set_ylabel("Valor")
+    ax1.grid(True)
+    st.pyplot(fig1)
+
+    fig2, ax2 = plt.subplots()
+    ax2.plot(v, f_exp, color='orange', label="Exponencial")
+    ax2.set_title("Fator Exponencial × Velocidade")
+    ax2.set_xlabel("Velocidade (m/s)")
+    ax2.set_ylabel("Valor")
+    ax2.grid(True)
+    st.pyplot(fig2)
+
+    fig3, ax3 = plt.subplots()
+    ax3.plot(v, f_MB, color='green', label="F(v)")
+    ax3.set_title("Distribuição de Maxwell-Boltzmann")
+    ax3.set_xlabel("Velocidade (m/s)")
+    ax3.set_ylabel("F(v)")
+    ax3.grid(True)
+    st.pyplot(fig3)
 
 # Página 2
 elif pagina == "2. Um gás, duas temperaturas":
@@ -52,18 +69,43 @@ elif pagina == "2. Um gás, duas temperaturas":
     T2 = st.number_input("Temperatura 2 (K)", value=740.0, step=1.0)
     M = massa_molar / 1000
 
-    f1 = F_MB(v, M, T1)
-    f2 = F_MB(v, M, T2)
+    f_pre1 = fator_pre_exp(v, M, T1)
+    f_exp1 = fator_exp(v, M, T1)
+    f_MB1 = F_MB(v, M, T1)
 
-    fig, ax = plt.subplots()
-    ax.plot(v, f1, label=f"{massa_molar} g/mol a {T1} K", color='blue')
-    ax.plot(v, f2, label=f"{massa_molar} g/mol a {T2} K", color='red')
-    ax.set_title("Distribuição para um mesmo gás em duas temperaturas")
-    ax.set_xlabel("Velocidade (m/s)")
-    ax.set_ylabel("F(v)")
-    ax.legend()
-    ax.grid(True)
-    st.pyplot(fig)
+    f_pre2 = fator_pre_exp(v, M, T2)
+    f_exp2 = fator_exp(v, M, T2)
+    f_MB2 = F_MB(v, M, T2)
+
+    fig1, ax1 = plt.subplots()
+    ax1.plot(v, f_pre1, label=f"Pré-exp. T={T1}K", color="blue")
+    ax1.plot(v, f_pre2, label=f"Pré-exp. T={T2}K", color="red")
+    ax1.set_title("Fator Pré-Exponencial × Velocidade")
+    ax1.set_xlabel("Velocidade (m/s)")
+    ax1.set_ylabel("Valor")
+    ax1.legend()
+    ax1.grid(True)
+    st.pyplot(fig1)
+
+    fig2, ax2 = plt.subplots()
+    ax2.plot(v, f_exp1, label=f"Exp. T={T1}K", color="blue")
+    ax2.plot(v, f_exp2, label=f"Exp. T={T2}K", color="red")
+    ax2.set_title("Fator Exponencial × Velocidade")
+    ax2.set_xlabel("Velocidade (m/s)")
+    ax2.set_ylabel("Valor")
+    ax2.legend()
+    ax2.grid(True)
+    st.pyplot(fig2)
+
+    fig3, ax3 = plt.subplots()
+    ax3.plot(v, f_MB1, label=f"F(v) T={T1}K", color="blue")
+    ax3.plot(v, f_MB2, label=f"F(v) T={T2}K", color="red")
+    ax3.set_title("Distribuição de Maxwell-Boltzmann")
+    ax3.set_xlabel("Velocidade (m/s)")
+    ax3.set_ylabel("F(v)")
+    ax3.legend()
+    ax3.grid(True)
+    st.pyplot(fig3)
 
 # Página 3
 elif pagina == "3. Dois gases, uma temperatura":
@@ -77,15 +119,40 @@ elif pagina == "3. Dois gases, uma temperatura":
     M1 = massa_molar_1 / 1000
     M2 = massa_molar_2 / 1000
 
-    f1 = F_MB(v, M1, temperatura)
-    f2 = F_MB(v, M2, temperatura)
+    f_pre1 = fator_pre_exp(v, M1, temperatura)
+    f_exp1 = fator_exp(v, M1, temperatura)
+    f_MB1 = F_MB(v, M1, temperatura)
 
-    fig, ax = plt.subplots()
-    ax.plot(v, f1, label=f"{massa_molar_1} g/mol", color='purple')
-    ax.plot(v, f2, label=f"{massa_molar_2} g/mol", color='orange')
-    ax.set_title("Distribuição para dois gases em uma mesma temperatura")
-    ax.set_xlabel("Velocidade (m/s)")
-    ax.set_ylabel("F(v)")
-    ax.legend()
-    ax.grid(True)
-    st.pyplot(fig)
+    f_pre2 = fator_pre_exp(v, M2, temperatura)
+    f_exp2 = fator_exp(v, M2, temperatura)
+    f_MB2 = F_MB(v, M2, temperatura)
+
+    fig1, ax1 = plt.subplots()
+    ax1.plot(v, f_pre1, label=f"Pré-exp. {massa_molar_1} g/mol", color="purple")
+    ax1.plot(v, f_pre2, label=f"Pré-exp. {massa_molar_2} g/mol", color="orange")
+    ax1.set_title("Fator Pré-Exponencial × Velocidade")
+    ax1.set_xlabel("Velocidade (m/s)")
+    ax1.set_ylabel("Valor")
+    ax1.legend()
+    ax1.grid(True)
+    st.pyplot(fig1)
+
+    fig2, ax2 = plt.subplots()
+    ax2.plot(v, f_exp1, label=f"Exp. {massa_molar_1} g/mol", color="purple")
+    ax2.plot(v, f_exp2, label=f"Exp. {massa_molar_2} g/mol", color="orange")
+    ax2.set_title("Fator Exponencial × Velocidade")
+    ax2.set_xlabel("Velocidade (m/s)")
+    ax2.set_ylabel("Valor")
+    ax2.legend()
+    ax2.grid(True)
+    st.pyplot(fig2)
+
+    fig3, ax3 = plt.subplots()
+    ax3.plot(v, f_MB1, label=f"F(v) {massa_molar_1} g/mol", color="purple")
+    ax3.plot(v, f_MB2, label=f"F(v) {massa_molar_2} g/mol", color="orange")
+    ax3.set_title("Distribuição de Maxwell-Boltzmann")
+    ax3.set_xlabel("Velocidade (m/s)")
+    ax3.set_ylabel("F(v)")
+    ax3.legend()
+    ax3.grid(True)
+    st.pyplot(fig3)
