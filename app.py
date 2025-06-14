@@ -63,7 +63,7 @@ Onde:
 
 - **Fator exponencial**:
   $$
-  e^{-\\frac{Mv^2}{2RT}}
+  e^{-\\{Mv^2}/{2RT}}
   $$
   Esse termo **decresce exponencialmente** com o aumento da velocidade, limitando a probabilidade de existirem moléculas muito rápidas.
 
