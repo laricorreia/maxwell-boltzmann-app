@@ -30,7 +30,7 @@ pagina = st.sidebar.radio("Escolha a visualização:", [
 # Página 0 - Introdução
 if pagina == "0. Introdução":
     st.title("Distribuição de Maxwell-Boltzmann")
-    st.markdown("### Bem-vindo ao Simulador de Maxwell-Boltzmann 🧪")
+    st.markdown("### Bem-vindo ao Simulador de Maxwell-Boltzmann ⚛️")
 
     st.markdown(r'''
 A **Distribuição de Maxwell-Boltzmann** descreve como as velocidades das moléculas de um gás ideal se distribuem em função da temperatura. Ela foi proposta por **James Clerk Maxwell** e aprimorada por **Ludwig Boltzmann**, sendo um dos pilares da **termodinâmica estatística**.
@@ -53,6 +53,19 @@ Onde:
 - \(T\): temperatura (K)
 - \(R\): constante dos gases (8,314 J/mol·K)
 
+### 📌 Interpretação da equação:
+
+- **Fator pré-exponencial**:
+  $$
+  4\pi \left( \frac{M}{2\pi RT} \right)^{3/2} v^2
+  $$
+  Esse termo é responsável pelo **crescimento inicial** da função com o aumento da velocidade — ele depende do quadrado da velocidade e da temperatura do sistema.
+
+- **Fator exponencial**:
+  $$
+  e^{-\\frac{Mv^2}{2RT}}
+  $$
+  Esse termo **decresce exponencialmente** com o aumento da velocidade, limitando a probabilidade de existirem moléculas muito rápidas.
 
 
 
