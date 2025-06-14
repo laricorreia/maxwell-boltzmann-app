@@ -85,7 +85,7 @@ Cada página mostra:
 
 # Página 1
 elif pagina == "1. Um gás, uma temperatura":
-    st.title("Página 1: Um gás, uma temperatura")
+    st.title("1. Um gás, uma temperatura")
 
     massa_molar = st.number_input("Massa molar (g/mol)", value=44.0, step=0.1)
     temperatura = st.number_input("Temperatura (K)", value=288.0, step=1.0)
@@ -121,7 +121,7 @@ elif pagina == "1. Um gás, uma temperatura":
 
 # Página 2
 elif pagina == "2. Um gás, duas temperaturas":
-    st.title("Página 2: Um gás, duas temperaturas")
+    st.title("2. Um gás, duas temperaturas")
 
     massa_molar = st.number_input("Massa molar (g/mol)", value=44.0, step=0.1)
     T1 = st.number_input("Temperatura 1 (K)", value=288.0, step=1.0)
@@ -168,7 +168,7 @@ elif pagina == "2. Um gás, duas temperaturas":
 
 # Página 3
 elif pagina == "3. Dois gases, uma temperatura":
-    st.title("Página 3: Dois gases, uma temperatura")
+    st.title("3. Dois gases, uma temperatura")
 
     massa_molar_1 = st.number_input("Massa molar do gás 1 (g/mol)", value=44.0, step=0.1)
     massa_molar_2 = st.number_input("Massa molar do gás 2 (g/mol)", value=2.0, step=0.1)
