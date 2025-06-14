@@ -52,7 +52,7 @@ Onde:
 - \\(M\\): massa molar (kg/mol)
 - \\(T\\): temperatura (K)
 - \\(R\\): constante dos gases (8{,}314 J/mol·K)
-''')
+
 
 
 
