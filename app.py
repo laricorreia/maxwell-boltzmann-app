@@ -19,7 +19,7 @@ def F_MB(v, M, T):
 v = np.linspace(0, 4000, 500)
 
 # Sidebar de navegação
-st.sidebar.title("Simulador de Maxwell-Boltzmann ⚛️")
+st.sidebar.title("Simulador de Maxwell-Boltzmann")
 pagina = st.sidebar.radio("Escolha a visualização:", [
     "0. Introdução",
     "1. Um gás, uma temperatura",
