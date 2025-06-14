@@ -40,17 +40,22 @@ Essa distribuição ajuda a entender:
 - Por que **moléculas mais leves** tendem a se mover mais rápido
 - A razão pela qual certos **gases escapam da atmosfera de planetas**
 
+st.markdown(r'''
 A equação usada neste simulador é:
 
-\\[
-F(v) = 4\\pi \\left(\\frac{M}{2\\pi RT}\\right)^{3/2} v^2 \\cdot e^{-\\frac{Mv^2}{2RT}}
-\\]
+$$
+F(v) = 4\pi \left( \frac{M}{2\pi RT} \right)^{3/2} v^2 \cdot e^{-\\frac{Mv^2}{2RT}}
+$$
 
 Onde:
+
 - \\(F(v)\\): densidade de probabilidade de velocidade \\(v\\)
 - \\(M\\): massa molar (kg/mol)
 - \\(T\\): temperatura (K)
-- \\(R\\): constante dos gases (8,314 J/mol·K)
+- \\(R\\): constante dos gases (8{,}314 J/mol·K)
+''')
+
+
 
 ---
 
