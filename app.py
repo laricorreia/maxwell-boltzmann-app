@@ -1,55 +1,3 @@
-pagina = st.sidebar.radio("Escolha a visualização:", [
-    "0. Introdução",
-    "1. Um gás, uma temperatura",
-    "2. Um gás, duas temperaturas",
-    "3. Dois gases, uma temperatura"
-])
-# Página 0 - Introdução
-if pagina == "0. Introdução":
-    st.title("Distribuição de Maxwell-Boltzmann")
-    st.markdown("### Bem-vindo ao Simulador de Maxwell-Boltzmann 🧪")
-
-    st.markdown(r'''
-A **Distribuição de Maxwell-Boltzmann** é uma função estatística que descreve como as velocidades das partículas (gases ideais) se distribuem a uma dada temperatura. Essa distribuição foi formulada por **James Clerk Maxwell** e posteriormente generalizada por **Ludwig Boltzmann**, sendo uma das fundações da **termodinâmica estatística**.
-
-Essa distribuição é fundamental para prever:
-- A **probabilidade de uma molécula atingir certa velocidade**
-- A **influência da temperatura** sobre a energia cinética das partículas
-- A **capacidade de um planeta reter gases em sua atmosfera** (como no caso da Terra e de Vênus)
-
-A equação que representa a distribuição é:
-
-\\[
-F(v) = 4\\pi \\left(\\frac{M}{2\\pi RT}\\right)^{3/2} v^2 \\cdot e^{-\\frac{Mv^2}{2RT}}
-\\]
-
-Onde:
-- \\(F(v)\\): densidade de probabilidade de velocidade \\(v\\)
-- \\(M\\): massa molar do gás (em kg/mol)
-- \\(T\\): temperatura em kelvin
-- \\(R\\): constante universal dos gases ideais (8.314 J/mol·K)
-
-Essa equação é composta por:
-- Um **fator pré-exponencial**: relacionado ao crescimento quadrático com a velocidade (\\(v^2\\))
-- Um **fator exponencial**: que decresce rapidamente com o aumento de \\(v\\)
-
----
-
-### 🔍 O que você pode explorar neste app:
-
-- **Página 1** – Visualizar um gás único em uma temperatura fixa
-- **Página 2** – Comparar o mesmo gás em duas temperaturas diferentes
-- **Página 3** – Comparar dois gases diferentes em uma mesma temperatura
-
-Cada página gera automaticamente:
-- O **fator pré-exponencial** vs velocidade
-- O **fator exponencial** vs velocidade
-- A **função completa F(v)** (distribuição de velocidades)
-
-Use os controles da barra lateral para inserir os valores desejados e estudar o comportamento das moléculas!
-''')
-
-
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
@@ -70,14 +18,57 @@ def F_MB(v, M, T):
 # Vetor de velocidades
 v = np.linspace(0, 4000, 500)
 
-# Interface com múltiplas páginas
+# Sidebar de navegação
 st.sidebar.title("Navegação")
-pagina = st.sidebar.radio("Escolha a visualização:", ["1. Um gás, uma temperatura", "2. Um gás, duas temperaturas", "3. Dois gases, uma temperatura"])
+pagina = st.sidebar.radio("Escolha a visualização:", [
+    "0. Introdução",
+    "1. Um gás, uma temperatura",
+    "2. Um gás, duas temperaturas",
+    "3. Dois gases, uma temperatura"
+])
+
+# Página 0 - Introdução
+if pagina == "0. Introdução":
+    st.title("Distribuição de Maxwell-Boltzmann")
+    st.markdown("### Bem-vindo ao Simulador de Maxwell-Boltzmann 🧪")
+
+    st.markdown(r'''
+A **Distribuição de Maxwell-Boltzmann** descreve como as velocidades das moléculas de um gás ideal se distribuem em função da temperatura. Ela foi proposta por **James Clerk Maxwell** e aprimorada por **Ludwig Boltzmann**, sendo um dos pilares da **termodinâmica estatística**.
+
+Essa distribuição ajuda a entender:
+- Como o **aumento de temperatura** afeta a velocidade das moléculas
+- Por que **moléculas mais leves** tendem a se mover mais rápido
+- A razão pela qual certos **gases escapam da atmosfera de planetas**
+
+A equação usada neste simulador é:
+
+\\[
+F(v) = 4\\pi \\left(\\frac{M}{2\\pi RT}\\right)^{3/2} v^2 \\cdot e^{-\\frac{Mv^2}{2RT}}
+\\]
+
+Onde:
+- \\(F(v)\\): densidade de probabilidade de velocidade \\(v\\)
+- \\(M\\): massa molar (kg/mol)
+- \\(T\\): temperatura (K)
+- \\(R\\): constante dos gases (8,314 J/mol·K)
+
+---
+
+### 🔍 O que você pode explorar neste app:
+
+- **Página 1:** Um gás em uma única temperatura
+- **Página 2:** Um gás em **duas temperaturas diferentes**
+- **Página 3:** **Dois gases diferentes** em uma mesma temperatura
+
+Cada página mostra:
+- **Fator pré-exponencial** × velocidade
+- **Fator exponencial** × velocidade
+- **Distribuição F(v)** × velocidade
+''')
 
 # Página 1
-if pagina == "1. Um gás, uma temperatura":
-    st.title("Distribuição de Maxwell-Boltzmann")
-    st.markdown("### Página 1: Um gás em uma temperatura")
+elif pagina == "1. Um gás, uma temperatura":
+    st.title("Página 1: Um gás, uma temperatura")
 
     massa_molar = st.number_input("Massa molar (g/mol)", value=44.0, step=0.1)
     temperatura = st.number_input("Temperatura (K)", value=288.0, step=1.0)
@@ -88,7 +79,7 @@ if pagina == "1. Um gás, uma temperatura":
     f_MB = F_MB(v, M, temperatura)
 
     fig1, ax1 = plt.subplots()
-    ax1.plot(v, f_pre, label="Pré-Exponencial")
+    ax1.plot(v, f_pre, label="Pré-exponencial")
     ax1.set_title("Fator Pré-Exponencial × Velocidade")
     ax1.set_xlabel("Velocidade (m/s)")
     ax1.set_ylabel("Valor")
@@ -113,8 +104,7 @@ if pagina == "1. Um gás, uma temperatura":
 
 # Página 2
 elif pagina == "2. Um gás, duas temperaturas":
-    st.title("Distribuição de Maxwell-Boltzmann")
-    st.markdown("### Página 2: Um gás em duas temperaturas")
+    st.title("Página 2: Um gás, duas temperaturas")
 
     massa_molar = st.number_input("Massa molar (g/mol)", value=44.0, step=0.1)
     T1 = st.number_input("Temperatura 1 (K)", value=288.0, step=1.0)
@@ -161,8 +151,7 @@ elif pagina == "2. Um gás, duas temperaturas":
 
 # Página 3
 elif pagina == "3. Dois gases, uma temperatura":
-    st.title("Distribuição de Maxwell-Boltzmann")
-    st.markdown("### Página 3: Dois gases em uma mesma temperatura")
+    st.title("Página 3: Dois gases, uma temperatura")
 
     massa_molar_1 = st.number_input("Massa molar do gás 1 (g/mol)", value=44.0, step=0.1)
     massa_molar_2 = st.number_input("Massa molar do gás 2 (g/mol)", value=2.0, step=0.1)
